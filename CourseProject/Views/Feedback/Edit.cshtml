@@ -1,0 +1,58 @@
+﻿@model CourseProject.DAL.Entity.Feedback
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h1>Edit</h1>
+
+<h4>Feedback</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="FeedbackId" />
+            <img src="@Model.FeedbackUrl" class="img-fluid" alt="Responsive image">
+            <br /><br /><br /><br />
+            <div class="form-group">
+                <label asp-for="FeedbackUrl" class="control-label"></label>
+                <input asp-for="FeedbackUrl" class="form-control" />
+                <span asp-validation-for="FeedbackUrl" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="File" class="control-label">Seçim yapınız</label>
+                <input asp-for="File" class="form-control" />
+
+                <span asp-validation-for="File" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="StartNumber" class="control-label"></label>
+                <input asp-for="StartNumber" class="form-control" />
+                <span asp-validation-for="StartNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FeedbackText" class="control-label"></label>
+                <input asp-for="FeedbackText" class="form-control" />
+                <span asp-validation-for="FeedbackText" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NameSurname" class="control-label"></label>
+                <input asp-for="NameSurname" class="form-control" />
+                <span asp-validation-for="NameSurname" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

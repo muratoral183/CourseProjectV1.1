@@ -1,0 +1,365 @@
+﻿@model CourseProject.ViewModels.HomePageViewModel;
+<!-- breadcrumb start -->
+<section class="breadcrumb-area">
+    <div class="container">
+        <div class="col">
+            <div class="row">
+                <div class="breadcrumb-index">
+                    <!-- breadcrumb main-title start-->
+                    <div class="breadcrumb-title">
+                        <h2>Ürünler</h2>
+                    </div>
+                    <!-- breadcrumb main-title end-->
+                    <!-- breadcrumb-list start -->
+                    <ul class="breadcrumb-list">
+                        <li class="breadcrumb-item-link">
+                            <a href="index.html">Home</a>
+                        </li>
+                        <li class="breadcrumb-item-link">
+                            <span>Ürünler</span>
+                        </li>
+                    </ul>
+                    <!-- breadcrumb-list end -->
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- breadcrumb end -->
+<section class="main-content-wrap shop-page section-ptb">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div class="pro-grli-wrapper left-side-wrap">
+                    <div class="pro-grli-wrap product-grid">
+                        <div class="collection-img-wrap">
+                            <h6 class="st-title">Ürünler</h6>
+                            <!-- collection info start -->
+                            <div class="collection-info">
+                                <div class="collection-image banner-hover">
+                                    <img src="~/webside/img/collection/collection-banner-01.jpg" class="img-fluid" alt="collection-banner-01">
+                                </div>
+                            </div>
+                            <!-- collection info end -->
+                        </div>
+                        <!-- shop-top-bar start -->
+                        <div class="shop-top-bar collection">
+                            <div class="product-filter without-sidebar">
+                                <button class="filter-button" type="button"><i class="feather-filter"></i><span>Sonuç</span></button>
+                            </div>
+                            <div class="product-view-mode">
+                                <!-- shop-item-filter-list start -->
+                                <a href="javascript:void(0)" class="list-change-view grid-three" data-grid-view="3"><i class="feather-grid"></i></a>
+                                <a href="javascript:void(0)" data-grid-view="1" class="list-change-view list-one active"><i class="feather-list"></i></a>
+                                <!-- shop-item-filter-list end -->
+                            </div>
+                            <!-- product-short start -->
+                            <div class="product-short">
+                                <label for="SortBy">Sort by:</label>
+                                <select class="nice-select" name="sortby" id="SortBy">
+                                    <option value="manual">Featured</option>
+                                    <option value="best-selling">Best Selling</option>
+                                    <option value="title-ascending">Alphabetically, A-Z</option>
+                                    <option value="title-descending">Alphabetically, Z-A</option>
+                                    <option value="price-ascending">Price, low to high</option>
+                                    <option value="price-descending">Price, high to low</option>
+                                    <option value="created-descending">Date, new to old</option>
+                                    <option value="created-ascending">Date, old to new</option>
+                                </select>
+                                <a href="javascript:void(0)" class="short-title">
+                                    <span class="sort-title">Best Selling</span>
+                                    <span class="sort-icon"><i class="bi bi-chevron-down"></i></span>
+                                </a>
+                                <a href="javascript:void(0)" class="short-title short-title-lg">
+                                    <span class="sort-title">Best Selling</span>
+                                    <span class="sort-icon"><i class="bi bi-chevron-down"></i></span>
+                                </a>
+                                <ul class="collapse" role="list" id="select-wrap">
+                                    <li><a href="javascript:void(0)">Featured</a></li>
+                                    <li class="selected"><a href="javascript:void(0)">Best Selling</a></li>
+                                    <li><a href="javascript:void(0)">Alphabetically, A-Z</a></li>
+                                    <li><a href="javascript:void(0)">Alphabetically, Z-A</a></li>
+                                    <li><a href="javascript:void(0)">Price, low to high</a></li>
+                                    <li><a href="javascript:void(0)">Price, high to low</a></li>
+                                    <li><a href="javascript:void(0)">Date, new to old</a></li>
+                                    <li><a href="javascript:void(0)">Date, old to new</a></li>
+                                </ul>
+                            </div>
+                            <!-- product-short end -->
+                        </div>
+                        <!-- shop-top-bar end -->
+                        <div class="get-data-products">
+                            <div class="shop-grid">
+                                <div id="ProductGridContainer">
+                                    <div class="product-grid-view">
+                                        <div class="shop-product-wrap collection grid-3">
+                                            <div class="row">
+                                                <div class="col">
+                                                    <ul class="product-view" id="product-grid">
+                                                        @{
+                                                            double? prodPrice = 0.0;
+                                                        }
+                                                        @foreach (var itemProduct in Model.Product)
+                                                        {
+                                                            prodPrice = itemProduct.Price + (itemProduct.Price * 10 / 100);
+                                                            <li class="st-col-item">
+                                                                <div class="single-product-wrap">
+                                                                    <!-- product-img start -->
+                                                                    <div class="product-image">
+                                                                        <a href="product-template2.html" class="pro-img">
+                                                                            <img src="@itemProduct.ProductUrl" class="img-fluid img1" alt="packging-pro-01.jpg">
+                                                                        </a>
+                                                                        <!-- product-action start -->
+                                                                        <div class="product-action">
+                                                                            <a href="wishlist-product.html" class="wishlist-product">
+                                                                                <span class="wishlist-icon"><i class="feather-heart"></i></span>
+                                                                            </a>
+                                                                        </div>
+                                                                        <form id="addBasket">
+                                                                            <div class="product-add-cart-action">
+                                                                                <div class="product-action">
+                                                                                    <a href="javascript:void(0)" class="add-to-cart" data-product-id="@itemProduct.ProductId" data-product-name="@itemProduct.Name" data-product-price="@itemProduct.Price" data-product-url="@itemProduct.ProductUrl">
+                                                                                        <span class="cart-title">Sepete Ekle</span>
+                                                                                    </a>
+                                                                                </div>
+                                                                            </div>
+                                                                        </form>
+                                                                        <!-- product-action end -->
+                                                                    </div>
+                                                                    <!-- product-img end -->
+                                                                    <!-- product-content start -->
+                                                                    <div class="product-content">
+                                                                        <!-- product-title start -->
+                                                                        <h6><a href="product-template2.html">@itemProduct.Name</a></h6>
+                                                                        <!-- product-title end -->
+                                                                        <!-- product-price start -->
+                                                                        <div class="price-box">
+                                                                            <span class="new-price">@itemProduct.Qunit @itemProduct.Price</span>
+                                                                            <span class="old-price">@itemProduct.Qunit @prodPrice</span>
+                                                                        </div>
+                                                                        <!-- product-price end -->
+                                                                        <p class="product-description">The purpose of lorem ipsum is to create a natural looking block of text (sentence, paragraph, page, etc.) that doesn't distract from the layout.</p>
+                                                                        <!-- product-action start -->
+                                                                        <div class="product-action">
+                                                                            <a href="wishlist-product.html" class="wishlist-product">
+                                                                                <span class="wishlist-icon"><i class="feather-heart"></i></span>
+                                                                            </a>
+                                                                            <a href="javascript:void(0)" class="add-to-cart" data-product-id="@itemProduct.ProductId" data-product-name="@itemProduct.Name" data-product-price="@itemProduct.Price" data-product-url="@itemProduct.ProductUrl">
+                                                                                <span class="cart-icon"><i class="feather-shopping-bag"></i></span>
+                                                                                <span class="add-title">Sepete Ekle</span>
+                                                                            </a>
+                                                                        </div>
+                                                                        <!-- product-action end -->
+                                                                    </div>
+                                                                    <!-- product-content end -->
+                                                                </div>
+                                                            </li>
+                                                        }
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="pro-grli-wrap product-sidebar">
+                        <div id="main-collection-filters">
+                            <div class="shop-sidebar-inner">
+                                <div class="shop-sidebar-wrap filter-sidebar">
+                                    <!-- button start -->
+                                    <button class="close-filter-sidebar close-filter-without" type="button">
+                                        <i class="feather-x"></i>
+                                    </button>
+                                    <!-- button end -->
+                                    <!-- filter-form start -->
+                                    <facet-filters-form class="facets">
+                                        <form class="facets__form" id="FacetFiltersForm" action="CollectionList" method="post">
+                                            <div id="FacetsWrapperDesktop" class="facets__wrapper">
+                                                <!-- Product-Categories start -->
+                                                <div class="shop-sidebar sidebar-wedget size">
+                                                    <h6 class="title">Kategori</h6>
+                                                    <a href="#collapse-5" data-bs-toggle="collapse" class="title">Kategori</a>
+                                                    <div class="collapse filter-element" id="collapse-5">
+                                                        <ul class="multiple-filters scrollbar">
+                                                            @{
+                                                                int? urunSay = 0;
+                                                            }
+                                                            @foreach (var itemCategory in Model.CategoryList)
+                                                            {
+                                                                <li class="size">
+                                                                    <label class="cust-checkbox-label size 16gb">
+                                                                        <input type="checkbox" value="16gb" class="cust-checkbox" asp-items="">
+                                                                        <span class="filter-name">@itemCategory.CategoryName</span>
+                                                                        <span class="count-check">(@itemCategory.AmbSayisi)</span>
+                                                                        <span class="cust-check"></span>
+                                                                    </label>
+                                                                </li>
+
+                                                                if (Model.MinPrice != null && Model.MaxPrice != null)
+                                                                {
+                                                                    urunSay = urunSay + itemCategory.AmbSayisi;
+                                                                }
+                                                                else
+                                                                {
+                                                                    urunSay = urunSay + Model.ProductCount;
+                                                                }
+                                                            }
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <!-- Product-Categories end -->
+                                                <div class="shop-sidebar sidebar-filter">
+                                                    <h6 class="title">Filter</h6>
+                                                    <div class="facets-header">
+                                                        <span class="product-count-text">@urunSay ürün</span>
+                                                        <span class="loading-spinner"><svg aria-hidden="true" focusable="false" role="presentation" class="spinner" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg"><circle class="path" fill="none" stroke-width="6" cx="33" cy="33" r="30"></circle></svg></span>
+                                                    </div>
+                                                    <div class="active-filter active-facets-desktop">
+                                                        <ul>
+                                                            <li>
+                                                                <facet-remove>
+                                                                    <a href="javascript:void(0)" class="clear-all">Clear all</a>
+                                                                </facet-remove>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <div class="shop-sidebar sidebar-wedget">
+                                                    <h6 class="title">Fiyat</h6>
+                                                    <a href="#collapse-3" data-bs-toggle="collapse" class="title">Price</a>
+
+                                                    <div class="collapse filter-element" id="collapse-3">
+                                                        <price-range class="price-range">
+                                                            <div class="price-input-group group-input">
+                                                                <div class="price-range-input input-prefix">
+                                                                    <label class="input-prefix-label">Minimum</label>
+                                                                    <span class="input-prefix-value">$</span>
+                                                                    <input id="demo1" class="input-prefix-field" type="number" min="0" asp-for="MinPrice" />
+                                                                </div>
+                                                                <span class="price-range-delimeter">-</span>
+                                                                <div class="price-range-input input-prefix">
+                                                                    <label class="input-prefix-label">Maksimum</label>
+                                                                    <span class="input-prefix-value">$</span>
+                                                                    <input id="demo2" class="input-prefix-field" type="number" min="0" asp-for="MaxPrice" />
+                                                                </div>
+                                                            </div>
+                                                            <input type="hidden" name="CategoryType" value="@ViewBag.TxtCategoryType" />
+                                                            <button class="search-button" type="submit">Ara</button>
+                                                        </price-range>
+                                                    </div>
+
+                                                    <style>
+                                                        .search-button {
+                                                            display: block;
+                                                            width: 100%;
+                                                            padding: 10px;
+                                                            background-color: #7B9C6D;
+                                                            color: white;
+                                                            border: none;
+                                                            border-radius: 5px;
+                                                            margin-top: 10px;
+                                                            text-align: center;
+                                                            cursor: pointer;
+                                                        }
+
+                                                            .search-button:hover {
+                                                                background-color: #9C8073;
+                                                            }
+                                                    </style>
+
+                                                    <!-- Product-price end -->
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </facet-filters-form>
+                                    <!-- filter-form end -->
+                                </div>
+                            </div>
+                            <!-- sidebar img start -->
+                            <div class="sidebar-banner banner-hover">
+                                <a href="javascript:void(0)" class="sidebar-img banner-img">
+                                    <span class="sidebar-banner-image">
+                                        <img src="~/webside/img/collection/collection-02.jpg" class="img-fluid" alt="collection-banner-02">
+                                    </span>
+                                    <span class="sidebar-banner-icon"><i class="bi bi-arrow-right-short"></i></span>
+                                </a>
+                            </div>
+                            <!-- sidebar img start -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        let addToCartButtons = document.querySelectorAll('.add-to-cart');
+      
+        addToCartButtons.forEach(button => {
+            button.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                // Ürün bilgilerini butonun data attribute'larından alalım
+                let productId = button.getAttribute('data-product-id');
+                let productName = button.getAttribute('data-product-name');
+                let productPrice = button.getAttribute('data-product-price');
+                let productUrl = button.getAttribute('data-product-url');
+
+                // Konsola yazdırma işlemleri
+                console.log("Ürün ID:", productId);
+                console.log("Ürün Adı:", productName);
+                console.log("Ürün Fiyatı:", productPrice);
+                console.log("Ürün URL:", productUrl);
+
+                Swal.fire({
+                    title: 'Ürün sepete ekleniyor',
+                    text: 'Bu ürünü sepetinize eklemek istediğinizden emin misiniz?',
+                    icon: 'question',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Evet, ekle!',
+                    cancelButtonText: 'İptal'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // Burada ürünü sepete ekleme işlemini gerçekleştirin
+                        addToCart(productId, productName, productPrice, productUrl);
+
+                        Swal.fire(
+                            'Eklendi!',
+                            'Ürün başarıyla sepetinize eklendi.',
+                            'success'
+                        );
+                    }
+                });
+            });
+        });
+    });
+
+    // Ürünü sepete eklemek için fonksiyon
+    function addToCart(productId, productName, productPrice, productUrl) {
+        let cart = JSON.parse(sessionStorage.getItem('cart')) || [];
+        cart.push({ id: productId, name: productName, price: productPrice, url: productUrl,quantity: 1 });
+        sessionStorage.setItem('cart', JSON.stringify(cart));
+
+        // Konsola yazdırma işlemleri
+        console.log("Sepete eklenen ürün:", { id: productId, name: productName, price: productPrice, url: productUrl, quantity: 1 });
+        console.log("Güncellenmiş sepet:", cart);
+        console.log("Sepetteki toplam ürün sayısı:", cart.length);
+
+        // Sepet sayısını güncelle
+        updateCartCount();
+
+        // Sepet sayısını güncellemek için fonksiyon
+        function updateCartCount() {
+            let cart = JSON.parse(sessionStorage.getItem('cart')) || [];
+            document.getElementById('cart-count').innerText = cart.length;
+        }
+    }
+
+
+</script>

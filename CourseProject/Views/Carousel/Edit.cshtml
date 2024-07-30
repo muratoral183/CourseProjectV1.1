@@ -1,0 +1,69 @@
+﻿@model CourseProject.DAL.Entity.Carousel
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h1>Edit</h1>
+
+<h4>Carousel</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="CarouselId" />
+
+            <img src="@Model.CarouselUrl" class="img-fluid" alt="Responsive image">
+            <br /><br /><br /><br />
+
+            <div class="form-group">
+                <label asp-for="CarouselUrl" class="control-label">Resim yolu</label>
+                <input asp-for="CarouselUrl" class="form-control" disabled/>
+                <span asp-validation-for="CarouselUrl" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="File" class="control-label">Seçim yapınız</label>
+                <input asp-for="File" class="form-control" />
+
+                <span asp-validation-for="File" class="text-danger"></span>
+            </div>
+
+
+            <div class="form-group">
+                <label asp-for="Title" class="control-label">Başlık</label>
+                <input asp-for="Title" class="form-control" />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description" class="control-label">Açıklama</label>
+                <input asp-for="Description" class="form-control" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Price" class="control-label">Fiyat</label>
+                <input asp-for="Price" class="form-control" />
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Qnit" class="control-label">Para birimi</label>
+                <input asp-for="Qnit" class="form-control" />
+                <span asp-validation-for="Qnit" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

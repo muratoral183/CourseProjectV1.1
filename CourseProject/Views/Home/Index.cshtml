@@ -1,0 +1,430 @@
+﻿@model CourseProject.ViewModels.HomePageViewModel;
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+
+<!-- home-slider start -->
+<section class="slider-content">
+    <div class="home-slider swiper" id="home-slider">
+        <div class="swiper-wrapper">
+   
+
+            @foreach (var item in Model.Carousel)
+            {
+                var modifiedUrl = item.CarouselUrl.Replace("mobile-", "");
+
+                <div class="swiper-slide">
+                    <div class="slide-image">
+                        <img src="@modifiedUrl" class="img-fluid desk-img" alt="backery-slider-01">
+                        <img src="@item.CarouselUrl" class="img-fluid mobile-img" alt="mobile-slider-01" >
+                        <div class="container slider-info-content">
+                            <div class="row">
+                                <div class="col">
+                                    <div class="slider-text-info slider-content-center slider-text-center">
+                                        <div class="slider-info-wrap">
+                                            <span class="slider-lable e2">
+                                                <span class="slider-lable_title" style="color:#ffffff;">@item.Title</span>
+
+                                            </span>
+                                            <h2 class="e1">
+                                                @*    <span>Size özel</span>
+                                            <span>form</span> *@
+                                                <span>@item.Description</span>
+                                            </h2>
+                                            <div class="slider-custom-text e1">
+                                                <span class="custom-text-1">@item.Price @item.Qnit </span>
+
+                                            </div>
+                                            <a href="/Home/CollectionList?CategoryType=1" class="btn btn-style e1">Koleksiyona göz at.</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+
+
+
+   
+        </div>
+        <div class="swiper-buttons">
+            <button class="swiper-prev"><i class=" feather-arrow-left"></i></button>
+            <button class="swiper-next"><i class=" feather-arrow-right"></i></button>
+        </div>
+        <div class="swiper-dots">
+            <div class="swiper-pagination"></div>
+        </div>
+    </div>
+</section>
+<!-- home-slider end -->
+<!-- slider-category start -->
+<section class="slider-category section-pt">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div class="section-capture">
+                    <div class="section-title">
+                        <h2>Kategori</h2>
+                    </div>
+                </div>
+                <div class="category-block">
+                    <div class="swiper" id="category-template">
+                        <div class="swiper-wrapper">
+                            @foreach (var categoryitem in Model.Category)
+                            {
+                                int catType = 0;
+                                if (categoryitem.Status == 1)
+                                {
+                                    catType = 1;
+                                }
+                                else
+                                {
+                                    catType = 2;
+                                }
+
+                            <div class="swiper-slide">
+                                <div class="category-item">
+
+                                        <a asp-controller="Home" asp-action="CollectionList" asp-route-CategoryType="@catType" class="icon-block">
+                                        <div class="category-text">
+                                           
+                                            <div class="title-block">
+                                                <span class="cat-title">@categoryitem.CategoryName</span>
+                                            </div>
+                                        </div>
+                                        <div class="cat-image">
+                                            <span class="cat-img">
+                                                    <img src="@categoryitem.CategoryUrl" class="img-fluid" alt="cat-01">
+                                            </span>
+                                        </div>
+                                            <div class="category-button" style="margin-left:24%">
+                                                <a asp-controller="Home" asp-action="CollectionList" asp-route-CategoryType="@catType" class="icon-block">
+                                                    <span class="button-title" >ŞİMDİ SATIN AL</span>
+                                                    <span class="button-block"><i class="feather-arrow-right"></i></span>
+                                                </a>
+                                            
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                            }
+                        </div>
+                        <div class="swiper-dots">
+                            <div class="swiper-pagination"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- slider-category end -->
+<!-- custom-banner start -->
+<section class="custom-banner section-ptb">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col">
+                <div class="custom-banner-wrap">
+                    <div class="banner-block banner-big-wrap">
+                        <ul>
+                            <li>
+                                <div class="custom-content-image">
+                                    <div class="custom-banner-image">
+                                        <a href="~/webside/collection.html" class="banner-img">
+                                            <img src="~/webside/img/banner/about-us.jpg" class="img-fluid" alt="about-us">
+                                            <span class="bannerimage-rotate">
+                                                <img src="~/webside/img/banner/round-1.png" class="img-fluid" alt="round-1">
+                                            </span>
+                                        </a>
+                                    </div>
+                                    <div class="custom-banner-content">
+                                        <div class="custom-banner-text">
+                                            <h2 class="banner-title">
+                                                <span>Kutulama işlemini biz yapıyoruz,</span>
+                                                <span>paketleri açıyoruz. </span>
+                                            </h2>
+                                            <p class="banner-desc">Ambalajlamayı, doğal yapraklarla seri üretim olarak yapıyoruz.</p>
+                                            <a href="~/webside/collection.html" class="btn btn-style">Daha fazla</a>
+                                        </div>
+                                        <div class="section-heading">
+                                            <h2 class="section-text" style="color: #eae7d8;">about</h2>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="banner-block banner-small-wrap">
+                        <ul>
+                            <li class="banner-small-wrap">
+                                <div class="banner-wrap">
+                                    <a href="~/webside/collection.html" class="banner-img">
+                                        <img src="~/webside/img/banner/banner-01.jpg" class="img-fluid desk-img1" alt="banner-01">
+                                        <img src="~/webside/img/banner/mobile-banner-01.jpg" class="img-fluid mobile-img1" alt="mobile-banner-01">
+                                        <div class="custom-bannerbg-text custom-text-left">
+                                            <span class="sub-title">Sınırlı teklif</span>
+                                            <h2>
+                                                <span>Doğal kağıtlarla</span>
+                                                <span>ambalajlama</span>
+                                            </h2>
+                                            <span class="banner-btn btn btn-style">ŞİMDİ SATIN AL</span>
+                                        </div>
+                                    </a>
+                                </div>
+                            </li>
+                            <li class="banner-small-wrap">
+                                <div class="banner-wrap">
+                                    <a href="~/webside/collection.html" class="banner-img">
+                                        <img src="~/webside/img/banner/banner-02.jpg" class="img-fluid desk-img1" alt="banner-02">
+                                        <img src="~/webside/img/banner/mobile-banner-02.jpg" class="img-fluid mobile-img1" alt="mobile-banner-02">
+                                        <div class="custom-bannerbg-text custom-text-right">
+                                            <span class="sub-title">En çok satan</span>
+                                            <h2>
+                                                <span>Öne çıkan</span>
+                                                <span>ambalajlar</span>
+                                            </h2>
+                                            <span class="banner-btn btn btn-style">ŞİMDİ SATIN AL</span>
+                                        </div>
+                                    </a>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- custom-banner end -->
+<!-- product start -->
+<section class="special-category collection-category-template section-ptb">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div class="collection-category">
+                    <div class="section-capture">
+                        <div class="section-title">
+                            <h2><span>Öne çıkan ürünler</span></h2>
+                        </div>
+                    </div>
+                    <div class="collection-wrap">
+                        <div class="collection-slider swiper" id="pro-template">
+                            <div class="swiper-wrapper">
+
+                                @if (Model.Product != null)
+                                {
+                                    double? oldPrice = 0.0;
+
+                                @foreach (var productItem in Model.Product)
+                                {
+
+                                        int catType = 0;
+                                        if (productItem.IsProductType == 1)
+                                        {
+                                            catType = 1;
+                                        }
+                                        else
+                                        {
+                                            catType = 2;
+                                        }
+                                        oldPrice = productItem.Price + (productItem.Price * 10 / 100);
+                                        <div class="swiper-slide">
+                                        <!-- product start -->
+                                        <div class="single-product-wrap">
+                                            <!-- product-img start -->
+                                            <div class="product-image">
+                                                    <a asp-controller="Home" asp-action="CollectionList" asp-route-CategoryType="@catType" class="pro-img">
+                                                    <img src="@productItem.ProductUrl" class="img-fluid img1" alt="packging-pro-01.jpg">
+                                          
+                                                </a>
+                                                <!-- product-action start -->
+                                                <div class="product-action">
+                                                        <a asp-controller="Home" asp-action="CollectionList" asp-route-CategoryType="@catType" class="wishlist-product">
+                                                        <span class="wishlist-icon"><i class="feather-heart"></i></span>
+                                                    </a>
+                                                </div>
+                                                <div class="product-add-cart-action">
+                                                    <div class="product-action">
+
+                                                            <a asp-controller="Home" asp-action="CollectionList" asp-route-CategoryType="@catType" class="quick-view"
+                                                           data-bs-target="#quickview">
+                                                            <span class="quickview-title">Sayfaya Git</span>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                                <!-- product-action end -->
+                                            </div>
+                                            <!-- product-img end -->
+                                            <!-- product-content start -->
+                                            <div class="product-content">
+                                                <!-- product-title start -->
+                                                <h6><a href="~/webside/product-template2.html">@productItem.Name</a></h6>
+                                                <!-- product-title end -->
+                                                <!-- product-price start -->
+                                                <div class="price-box">
+                                                    <span class="new-price">@productItem.Qunit @productItem.Price</span>
+                                                        <span class="old-price">@productItem.Qunit @oldPrice</span>
+                                                </div>
+                                                <!-- product-price end -->
+                                                <!-- product-action start -->
+                                                <div class="product-action">
+                                                    <a href="~/webside/wishlist-product.html" class="wishlist-product">
+                                                        <span class="wishlist-icon"><i class="feather-heart"></i></span>
+                                                    </a>
+                                                    <a href="~/webside/javascript:void(0)" class="add-to-cart">
+                                                        <span class="cart-icon"><i class="feather-shopping-bag"></i></span>
+                                                    </a>
+                                                    <a href="~/webside/#quickview" class="quick-view" data-bs-toggle="modal" data-bs-target="#quickview">
+                                                        <span class="quickview-icon"><i class="feather-eye"></i></span>
+                                                    </a>
+                                                </div>
+                                                <!-- product-action end -->
+                                            </div>
+                                            <!-- product-content end -->
+                                        </div>
+                                        <!-- product end -->
+                                    </div>
+                                 }
+                                }
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- product end -->
+<!-- testimonial start -->
+<section class="testimonial-area section-pt">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div class="section-capture">
+                    <div class="section-title">
+                        <h2>
+                            <span>Müşteri geri bildirimi</span>
+                        </h2>
+                    </div>
+                </div>
+                <div class="testi-area-wrap">
+                    <div class="testimonial-slider owl-carousel owl-theme" id="testimonial-slider">
+                      @foreach (var itemFeedback in Model.Feedback)
+                        {
+                            
+                       
+                        <div class="item">
+                            <div class="testi-content-info">
+                                <div class="author-img-icon">
+                                    <span class="testi-left">
+                                        <img src="~/webside/img/testimonial/quotes-icon.png" class="img-fluid" alt="quotes-icon">
+                                    </span>
+                                    <span class="testi-img">
+                                        <img src="@itemFeedback.FeedbackUrl" class="img-fluid" alt="testi-01">
+                                    </span>
+                                    <span class="testi-right">
+                                        <img src="~/webside/img/testimonial/quotes-icon-2.png" class="img-fluid" alt="quotes-icon-2">
+                                    </span>
+                                </div>
+                                <div class="testi-content">
+                                    <div class="testi-review-time">
+                                        <span class="testi-review">
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                        </span>
+                                    </div>
+                                    <div class="testi-desc">
+                                        <p>@itemFeedback.FeedbackText</p>
+                                    </div>
+                                    <div class="author-info">
+                                        <h6>@itemFeedback.NameSurname</h6>
+                                        <span>mağaza müşterisi</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        }
+                   
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- testimonial end -->
+<!-- newsletter start -->
+
+<br />
+<br />
+
+<br />
+
+<br />
+
+<br />
+
+
+<!-- service start -->
+<section class="our-service-area section-ptb">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <ul class="single-service">
+                    <li class="service-content">
+                        <div class="ser-block">
+                            <a href="~/webside/javascrpit:void(0)">
+                                <img src="~/webside/img/service/service-01.png" class="img-fluid" alt="service-01">
+                            </a>
+                            <div class="service-text">
+                                <h6>Google incelemesi</h6>
+                                <p>4.5 yıldız müşteri değerlendirmesi</p>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="service-content">
+                        <div class="ser-block">
+                            <a href="~/webside/javascrpit:void(0)">
+                                <img src="~/webside/img/service/service-02.png" class="img-fluid" alt="service-02">
+                            </a>
+                            <div class="service-text">
+                                <h6>Dünya çapında teslimat</h6>
+                                <p>Türkiye ve İngiltere'ye teslimat</p>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="service-content">
+                        <div class="ser-block">
+                            <a href="~/webside/javascrpit:void(0)">
+                                <img src="~/webside/img/service/service-03.png" class="img-fluid" alt="service-03">
+                            </a>
+                            <div class="service-text">
+                                <h6>Memnuniyet garantili</h6>
+                                <p>Ücretsiz iade</p>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="service-content">
+                        <div class="ser-block">
+                            <a href="~/webside/javascrpit:void(0)">
+                                <img src="~/webside/img/service/service-04.png" class="img-fluid" alt="service-04">
+                            </a>
+                            <div class="service-text">
+                                <h6>Müşteri desteği</h6>
+                                <p>Sorunuz mu var ?</p>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- service end -->

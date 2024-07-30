@@ -1,0 +1,101 @@
+﻿@model CourseProject.ViewModels.OrdersViewModel
+    <!-- breadcrumb start -->
+    <section class="breadcrumb-area">
+        <div class="container">
+            <div class="col">
+                <div class="row">
+                    <div class="breadcrumb-index">
+                        <!-- breadcrumb main-title start-->
+                        <div class="breadcrumb-title">
+                            <h2>Sipariş Tamamlandı</h2>
+                        </div>
+                        <!-- breadcrumb main-title end-->
+                        <!-- breadcrumb-list start -->
+                        <ul class="breadcrumb-list">
+                            <li class="breadcrumb-item-link">
+                                <a href="index.html">Home</a>
+                            </li>
+                            <li class="breadcrumb-item-link">
+                                <span>Sipariş numarası</span>
+                            </li>
+                        </ul>
+                        <!-- breadcrumb-list end -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- breadcrumb end -->
+    <!-- order-complete start -->
+    <section class="section-ptb">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <div class="order-area">
+                        <!-- order-price start -->
+                        <div class="order-price">
+                            <ul class="total-order">
+                            @{
+                                double totalPrice = 0.0;
+                            }
+                                @foreach (var itemOrders in Model.OrdersItems)
+                            {
+                                totalPrice = totalPrice + (itemOrders.Price * itemOrders.Quantity);
+                            }
+                                                                              <li>
+                                <span class="order-no">Sipariş No : @Model.lastOrdernum </span>
+                                    <span class="order-date"><span class="order-date">@DateTime.Now</span></span>
+                                </li>
+                                <li>
+                                    <span class="total-price">Sipariş tutarı</span>
+                                    <span class="amount">€ @totalPrice</span>
+                                </li>
+                           
+                            </ul>
+                        </div>
+                        <!-- order-price end -->
+                        <!-- order-details start -->
+                        <div class="order-details">
+                            <span class="text-success order-i"><i class="fa fa-check-circle"></i></span>
+                            <h4>Sipariş için teşekkür ederiz.</h4>
+                        <span class="order-s">Siparişiniz birkaç saat içinde kargoya verilir</span>
+                            <a asp-controller="Home" asp-action="PackingInfo" asp class="tracking-link btn btn-style2">Kargo Bilgisi</a>
+                        </div>
+                        <!-- order-details start -->
+                        <!-- order-delivery start -->
+                        <div class="order-delivery">
+                            <ul class="delivery-payment">
+                                <li class="delivery">
+                                    <h5>Teslimat adresi</h5>
+                                <p>@Model.ordersDetail.Company</p>
+                                    <span class="order-span">@Model.ordersDetail.Street</span>
+                                    <span class="order-span">@Model.ordersDetail.City</span>
+                                    <span class="order-span">@Model.ordersDetail.Town</span>
+                                    <span class="order-span">@Model.ordersDetail.Country</span>
+                                    <span class="order-span">Telefon No : @Model.ordersDetail.Phone</span>
+                                </li>
+                                <li class="pay">
+                                    <h5>Ödeme bilgileri</h5>
+                                    <p class="transition">İşlem No : 66282856617</p>
+                                    <span class="order-span p-label">
+                                        <span class="n-price">Fiyat</span>
+                                    <span class="o-price">€ @totalPrice</span>
+                                    </span>
+                                    <span class="order-span p-label">
+                                        <span class="n-price">Kargo</span>
+                                        <span class="o-price"><del>Ücretsiz</del></span>
+                                    </span>
+                                    <span class="order-span p-label">
+                                        <span class="n-price">Genel toplam</span>
+                                    <span class="o-price">€ @totalPrice</span>
+                                    </span>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- order-delivery start -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- order-complete end -->

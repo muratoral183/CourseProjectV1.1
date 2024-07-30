@@ -1,0 +1,154 @@
+﻿@page
+@model RegisterModel
+@{
+    Layout = "_WebSideLayout";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<div class="row">
+  @*   <div class="col-md-4">
+        <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
+            <h2>Create a new account.</h2>
+            <hr />
+            <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+            <div class="form-floating mb-3">
+                <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" placeholder="name@example.com" />
+                <label asp-for="Input.Email">Email</label>
+                <span asp-validation-for="Input.Email" class="text-danger"></span>
+            </div>
+            <div class="form-floating mb-3">
+                <input asp-for="Input.Password" class="form-control" autocomplete="new-password" aria-required="true" placeholder="password" />
+                <label asp-for="Input.Password">Password</label>
+                <span asp-validation-for="Input.Password" class="text-danger"></span>
+            </div>
+            <div class="form-floating mb-3">
+                <input asp-for="Input.ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true" placeholder="password" />
+                <label asp-for="Input.ConfirmPassword">Confirm Password</label>
+                <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+            </div>
+            <button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-primary">Register</button>
+        </form>
+    </div> *@
+
+    <!-- breadcrumb start-->
+    <section class="breadcrumb-area">
+        <div class="container">
+            <div class="col">
+                <div class="row">
+                    <div class="breadcrumb-index">
+                        <!-- breadcrumb main-title start-->
+                        <div class="breadcrumb-title">
+                            <h2>Create account</h2>
+                        </div>
+                        <!-- breadcrumb main-title end-->
+                        <!-- breadcrumb-list start -->
+                        <ul class="breadcrumb-list">
+                            <li class="breadcrumb-item-link">
+                                <a href="index.html">Home</a>
+                            </li>
+                            <li class="breadcrumb-item-link">
+                                <span>Hesap oluştur</span>
+                            </li>
+                        </ul>
+                        <!-- breadcrumb-list end-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- breadcrumb end-->
+    <section class="customer-page section-ptb">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <div class="acc-form">
+                        <div class="log-acc-page" id="CustomerRegisterForm">
+                            <!-- account title start -->
+                            <div class="content-main-title">
+                                <div class="section-cont-title">
+                                    <h2><span>Hesap oluştur</span></h2>
+                                    <p>Kayıt ol ve giriş yap</p>
+                                </div>
+                            </div>
+                            <!-- account title end -->
+                            <!-- account register start -->
+                            <div class="acc-page">
+                                <div class="registers">
+                                    <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
+                                        <div class="login-form-container">
+                                            <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+                                            <ul class="fill-form">
+                                                <li class="log-email">
+                                                    <label>Email adres</label>
+                                                    <input type="email" asp-for="Input.Email" class="input-full form-control" placeholder="Email adres" autocomplete="username" aria-required="true">
+                                                    <span asp-validation-for="Input.Email" class="text-danger"></span>
+                                                </li>
+                                                <li class="log-pwd">
+                                                    <label>Şifre</label>
+                                                    <input type="password" asp-for="Input.Password" class="input-full form-control" placeholder="Şifre" autocomplete="new-password" aria-required="true">
+                                                    <span asp-validation-for="Input.Password" class="text-danger"></span>
+                                                </li>
+                                                <li class="log-pwd">
+                                                    <label>Şifrenizi tekrar giriniz</label>
+                                                    <input type="password" asp-for="Input.ConfirmPassword" class="input-full form-control" placeholder="Şifrenizi tekrar giriniz" autocomplete="new-password" aria-required="true">
+                                                    <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+                                                </li>
+                                            </ul>
+                                            <div class="form-action-button">
+                                                <button id="registerSubmit" type="submit" class="btn btn-style2">Oluştur</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="acc-wrapper">
+                                    <h6>Zaten hesabınız var mı?</h6>
+                                    <div class="account-optional-action">
+                                        <a href="~/Identity/Account/Login">Giriş yap</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- account register end -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <div class="col-md-6 col-md-offset-2">
+        <section>
+           @*  <h3>Use another service to register.</h3> *@
+            <hr />
+            @{
+                if ((Model.ExternalLogins?.Count ?? 0) == 0)
+                {
+                    // <div>
+                    //     <p>
+                    //         There are no external authentication services configured. See this <a href="https://go.microsoft.com/fwlink/?LinkID=532715">article
+                    //         about setting up this ASP.NET application to support logging in via external services</a>.
+                    //     </p>
+                    // </div>
+                }
+                else
+                {
+                    <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
+                        <div>
+                            <p>
+                                @foreach (var provider in Model.ExternalLogins!)
+                                {
+                                    <button type="submit" class="btn btn-primary" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">@provider.DisplayName</button>
+                                }
+                            </p>
+                        </div>
+                    </form>
+                }
+            }
+        </section>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

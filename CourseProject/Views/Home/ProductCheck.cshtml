@@ -1,0 +1,281 @@
+﻿@model CourseProject.ViewModels.OrdersViewModel
+
+<style>
+    .comment-area {
+        margin-bottom: 20px; /* Textarea ile buton arasında boşluk */
+    }
+
+    .full-width {
+        display: block;
+        width: 100%;
+        text-align: center;
+        padding: 10px 0;
+        background-color: #7C9B6B; /* Buton arka plan rengi */
+        color: #fff; /* Buton metin rengi */
+        text-decoration: none;
+        border: none;
+        cursor: pointer;
+        margin-top: 10px; /* Textarea ile buton arasında boşluk */
+    }
+
+        .full-width:hover {
+            background-color: #7C9B6B; /* Hover durumunda buton arka plan rengi yeşil */
+        }
+</style>
+<section class="breadcrumb-area">
+    <div class="container">
+        <div class="col">
+            <div class="row">
+                <div class="breadcrumb-index">
+                    <div class="breadcrumb-title">
+                        <h2>Checkout 1</h2>
+                    </div>
+                    <ul class="breadcrumb-list">
+                        <li class="breadcrumb-item-link">
+                            <a href="index.html">Home</a>
+                        </li>
+                        <li class="breadcrumb-item-link">
+                            <span>Checkout 1</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section-ptb">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div class="checkout-area">
+                    <div class="billing-area">
+                        <form id="orderForm" asp-action="ProductCheck">
+                            <h2>Fatura Detayları</h2>
+                            <div class="billing-form">
+                                <ul class="billing-ul input-2">
+                                    <li class="billing-li input">
+                                        <label>İsim</label>
+                                        <input type="text" asp-for="ordersDetail.Name" id="name" placeholder="İsim" required>
+                                    </li>
+                                    <li class="billing-li">
+                                        <label>Soyisim</label>
+                                        <input type="text" asp-for="ordersDetail.Surname" id="surname" placeholder="Soyisim" required>
+                                    </li>
+                                </ul>
+                                <ul class="billing-ul">
+                                    <li class="billing-li">
+                                        <label>Şirket adı (isteğe bağlı)</label>
+                                        <input type="text" asp-for="ordersDetail.Company" id="company" placeholder="Şirket adı">
+                                    </li>
+                                </ul>
+                                <ul class="billing-ul">
+                                    <li class="billing-li">
+                                        <label>Ülke</label>
+                                        <select id="country" asp-items="ViewBag.CountryList" asp-for="ordersDetail.Country" required>
+                                           
+                                        </select>
+                                    </li>
+                                </ul>
+                                <ul class="billing-ul">
+                                    <li class="billing-li">
+                                        <label>Cadde</label>
+                                        <input type="text" asp-for="ordersDetail.Street" id="street" placeholder="Cadde" required>
+                                    </li>
+                                </ul>
+                                <ul class="billing-ul">
+                                    <li class="billing-li">
+                                        <label>Apartman vb. (İsteğe bağlı)</label>
+                                        <input type="text" asp-for="ordersDetail.Apartment" id="apartment">
+                                    </li>
+                                </ul>
+                                <ul class="billing-ul">
+                                    <li class="billing-li">
+                                        <label>İl</label>
+                                        <input type="text" asp-for="ordersDetail.City" id="city" required>
+                                    </li>
+                                </ul>
+                                <ul class="billing-ul">
+                                    <li class="billing-li">
+                                        <label>İlçe</label>
+                                        <input type="text" asp-for="ordersDetail.Town" id="town" required>
+                                    </li>
+                                </ul>
+                                <ul class="billing-ul">
+                                    <li class="billing-li">
+                                        <label>Posta kodu</label>
+                                        <input type="text" asp-for="ordersDetail.ZipCode" id="zipCode" required>
+                                    </li>
+                                </ul>
+                                <ul class="billing-ul input-2">
+                                    <li class="billing-li">
+                                        <label>Email adres</label>
+                                        <input type="text" asp-for="ordersDetail.Email" id="email" placeholder="Email adres" required>
+                                    </li>
+                                    <li class="billing-li">
+                                        <label>Telefon numarası</label>
+                                        <input type="text" asp-for="ordersDetail.Phone" id="phone" placeholder="Telefon numarası" required>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <div class="billing-details">
+                                <ul class="shipping-form pro-submit">
+                                    <li class="comment-area">
+                                        <label>Sipariş notu (İsteğe bağlı)</label>
+                                        <textarea  rows="5" cols="80" asp-for="ordersDetail.Note" id="note"></textarea>
+                                        <input class="btn-style checkout full-width" type="submit" onclick="submitOrder()" value="Sipariş Ver">
+                                    </li>
+                                </ul>
+                            </div>
+
+                       
+
+                        </form>
+
+                    </div>
+                    <div class="order-area">
+                        <div class="check-pro">
+                            <h2>Sepetiniz</h2>
+                            <ul class="cart-wrap" id="cart-content">
+                                <!-- Dinamik içerik buraya eklenecek -->
+                            </ul>
+                        </div>
+                        <h2>Siparişiniz</h2>
+                        <ul class="order-history">
+                            <li class="order-details">
+                                <span>Ödenecek Tutar</span>
+                                <span id="total-amount">€0,00</span>
+                            </li>
+                            <li class="order-details">
+                                <span>Kargo</span>
+                                <span><del>Ücretsiz kargo</del></span>
+                            </li>
+                            <li class="order-details">
+                                <span>Toplam</span>
+                                <span id="total-amount2">€0,00</span>
+                            </li>
+                        </ul>
+                        <form>
+                            <ul class="order-form pro-submit">
+                                <li class="label-info">
+                                    <label class="box-area">
+                                        <span class="text">Kredi kartı</span>
+                                        <input type="checkbox" class="cust-checkbox" onclick="onlyOne(this)">
+                                        <span class="cust-check"></span>
+                                    </label>
+                                </li>
+                                <li class="label-info">
+                                    <label class="box-area">
+                                        <span class="text">Paypal</span>
+                                        <input type="checkbox" class="cust-checkbox" onclick="onlyOne(this)">
+                                        <span class="cust-check"></span>
+                                    </label>
+                                </li>
+                                <li class="label-info">
+                                    <label class="box-area">
+                                        <span class="text">Banka kartı</span>
+                                        <input type="checkbox" class="cust-checkbox" onclick="onlyOne(this)">
+                                        <span class="cust-check"></span>
+                                    </label>
+                                </li>
+                                <li class="pay-icon">
+                                    <a href="javascript:void(0)"><i class="fa-solid fa-credit-card"></i></a>
+                                    <a href="javascript:void(0)"><i class="fa-brands fa-cc-visa"></i></a>
+                                    <a href="javascript:void(0)"><i class="fa-brands fa-cc-paypal"></i></a>
+                                    <a href="javascript:void(0)"><i class="fa-brands fa-cc-mastercard"></i></a>
+                                </li>
+                            </ul>
+                        </form>
+                 
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<script>
+    function submitOrder() {
+        let cart = JSON.parse(sessionStorage.getItem('cart')) || [];
+
+        fetch('/Home/SubmitOrder?data=' + encodeURIComponent('@ViewBag.ReceivedData'), {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(cart)
+        })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    Swal.fire({
+                        title: "Siparişiniz oluşturuldu!",
+                        text: "Kapatmak için burayı tıklayabilirsiniz!",
+                        icon: "success"
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            window.location.href = '@Url.Action("OrderComplete", "Home")';
+                        }
+                    });
+                } else {
+                    Swal.fire({
+                        title: "Hata!",
+                        text: "Sipariş oluşturulurken bir hata oluştu.",
+                        icon: "error"
+                    });
+                }
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+                Swal.fire({
+                    title: "Hata!",
+                    text: "Sipariş oluşturulurken bir hata oluştu.",
+                    icon: "error"
+                });
+            });
+    }
+
+    displayCartContent();
+
+    function displayCartContent() {
+        let cart = JSON.parse(sessionStorage.getItem('cart')) || [];
+        let cartContent = document.getElementById('cart-content');
+        let cartHTML = '';
+        let totalAmaunt = 0;
+
+        if (cart.length === 0) {
+            cartContent.innerHTML = '<p>Sepetinizde ürün yok.</p>';
+            document.getElementById('total-amount').innerText = '€0,00';
+            document.getElementById('total-amount2').innerText = '€0,00';
+
+            return;
+        }
+
+        cart.forEach(item => {
+            const totalPrice = item.quantity * item.price;
+            totalAmaunt += totalPrice;
+            cartHTML += `
+                <li style="display: flex; align-items: center; margin-bottom: 10px;margin-left:10px;">
+                    <div class="check-pro-img" style="flex: 0 0 25%; margin-right: 10px;">
+                        <a href="product-template.html">
+                            <img src="${item.url}" class="img-fluid" alt="${item.name}" style="width: 100%; border-radius: 15px; margin-top: 8%;">
+                        </a>
+                        <hr style="border: none; border-bottom: 1px solid #ccc; width: 100%; position: absolute; left: 0; right: 0; margin-top: 10px;">
+                    </div>
+                    <div class="check-content" style="flex: 1;margin-left:10%">
+                        <a href="${item.url}"><b>${item.name}</b></a>
+                        <div style="flex: 1;">
+                            <span class="check-qty" style="margin-top:3%">${item.quantity} X</span>
+                            <span class="check-price">€ ${item.price} = € ${totalPrice}</span>
+                        </div>
+                    </div>
+                </li>
+            `;
+        });
+
+        cartContent.innerHTML = cartHTML;
+        document.getElementById('total-amount').innerText = `€${totalAmaunt.toFixed(2)}`;
+        document.getElementById('total-amount2').innerText = `€${totalAmaunt.toFixed(2)}`;
+    }
+
+</script>

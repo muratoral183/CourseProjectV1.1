@@ -1,0 +1,222 @@
+﻿@page
+@model LoginModel
+
+@{
+ 
+    Layout = "_WebSideLayout";
+}
+
+<h1>@ViewData["Title"]</h1>
+@*
+<div class="row">
+   <div class="col-md-4">
+        <section>
+            <form id="account" method="post">
+                <h2>Use a local account to log in.</h2>
+                <hr />
+                <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+                <div class="form-floating mb-3">
+                    <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" placeholder="name@example.com" />
+                    <label asp-for="Input.Email" class="form-label">Email</label>
+                    <span asp-validation-for="Input.Email" class="text-danger"></span>
+                </div>
+                <div class="form-floating mb-3">
+                    <input asp-for="Input.Password" class="form-control" autocomplete="current-password" aria-required="true" placeholder="password" />
+                    <label asp-for="Input.Password" class="form-label">Password</label>
+                    <span asp-validation-for="Input.Password" class="text-danger"></span>
+                </div>
+                <div class="checkbox mb-3">
+                    <label asp-for="Input.RememberMe" class="form-label">
+                        <input class="form-check-input" asp-for="Input.RememberMe" />
+                        @Html.DisplayNameFor(m => m.Input.RememberMe)
+                    </label>
+                </div>
+                <div>
+                    <button id="login-submit" type="submit" class="w-100 btn btn-lg btn-primary">Log in</button>
+                </div>
+                <div>
+                    <p>
+                        <a id="forgot-password" asp-page="./ForgotPassword">Forgot your password?</a>
+                    </p>
+                    <p>
+                        <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Register as a new user</a>
+                    </p>
+                    <p>
+                        <a id="resend-confirmation" asp-page="./ResendEmailConfirmation">Resend email confirmation</a>
+                    </p>
+                </div>
+            </form>
+        </section>
+    </div> *@
+
+
+<section class="breadcrumb-area">
+    <div class="container">
+        <div class="col">
+            <div class="row">
+                <div class="breadcrumb-index">
+                    <!-- breadcrumb main-title start-->
+                    <div class="breadcrumb-title">
+                        <h2>Account</h2>
+                    </div>
+                    <!-- breadcrumb main-title end-->
+                    <!-- breadcrumb-list start -->
+                    <ul class="breadcrumb-list">
+                        <li class="breadcrumb-item-list">
+                            <a href="index.html">Home</a>
+                        </li>
+                        <li class="breadcrumb-item-list">
+                            <span>Account</span>
+                        </li>
+                    </ul>
+                    <!-- breadcrumb-list end -->
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- breadcrumb start-->
+<section class="customer-page section-ptb">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div class="acc-form">
+                    <div class="log-acc-page" id="CustomerLoginForm">
+                        <!-- account title start -->
+                        <div class="content-main-title">
+                            <div class="section-cont-title">
+                                <h2><span>Merhaba</span></h2>
+                                <p>Giriş yap veya hesap oluştur, indirimleri kaçırma!</p>
+                            </div>
+                        </div>
+                        <!-- account title end -->
+                        <!-- account login start -->
+                        <div class="acc-page">
+                            <div class="login">
+                                <form id="account" method="post">
+                                    <div class="login-form-container">
+                                        <ul class="fill-form">
+                                            <li class="log-email">
+                                                <label>Email adresi</label>
+                                                <input type="email" name="Input.Email" class="input-full form-control" placeholder="Email adresi" autocomplete="username" aria-required="true">
+                                                <span asp-validation-for="Input.Email" class="text-danger"></span>
+                                            </li>
+                                            <li class="log-pwd">
+                                                <label>Şifre</label>
+                                                <input type="password" name="Input.Password" class="input-full form-control" placeholder="Şifre" autocomplete="current-password" aria-required="true">
+                                                <span asp-validation-for="Input.Password" class="text-danger"></span>
+                                            </li>
+                                        </ul>
+                                        <div class="form-action-button">
+                                            <button type="submit" class="btn btn-style2">Giriş yap</button>
+                                            <a href="javascript:void(0)" onclick="myFunction()">Şifremi unuttum</a>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="acc-wrapper">
+                                <h6>Hesabınız mı yok?</h6>
+                                <div class="account-optional-action">
+                                    <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Hesap oluştur</a>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- account login end -->
+                    </div>
+                    <div class="log-acc-page" id="RecoverPasswordForm" style="display: none;">
+                        <!-- account title start -->
+                        <div class="content-main-title">
+                            <div class="section-cont-title">
+                                <h2><span class="title-main">Reset your password</span></h2>
+                                <p>We will send you an email to reset your password.</p>
+                            </div>
+                        </div>
+                        <!-- account title end -->
+                        <!-- account login start -->
+                        <div class="acc-page">
+                            <div class="login">
+                                <form method="post" action="">
+                                    <div class="login-form-container">
+                                        <ul class="fill-form">
+                                            <li class="log-email">
+                                                <label>Email adres</label>
+                                                <input type="email" name="q" class="input-full form-control" placeholder="Email adres" autocomplete="off">
+                                            </li>
+                                            <li class="form-toggle-btn">
+                                                <div class="form-action-button">
+                                                    <button type="submit" class="btn btn-style2">Submit</button>
+                                                    <a onclick="myFunction()" href="javascript:void(0)">Cancel</a>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <!-- account login end -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function myFunction() {
+            var x = document.getElementById("RecoverPasswordForm");
+            var y = document.getElementById("CustomerLoginForm");
+            if (x.style.display === "none") {
+                x.style.display = "block";
+            } else {
+                x.style.display = "none";
+            }
+            if (y.style.display === "none") {
+                y.style.display = "block";
+            } else {
+                y.style.display = "none";
+            }
+        }
+    </script>
+</section>
+
+    <div class="col-md-6 col-md-offset-2">
+        <section>
+   
+           
+            @{
+            int? logStatus = HttpContext.Session.GetInt32("logValue");
+                if ((Model.ExternalLogins?.Count ?? 0) == 0)
+                {
+              
+                 
+                }
+                else
+                {
+                    <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
+                        <div>
+                            <p>
+                                @foreach (var provider in Model.ExternalLogins!)
+                                {
+                                    <button type="submit" class="btn btn-primary" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">@provider.DisplayName</button>
+                                }
+                            </p>
+                        </div>
+                    </form>
+                }
+            }
+        </section>
+    </div>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        var logStatus = @logStatus; // Razor ile logStatus değerini al
+
+        if (logStatus == 2) {
+            Swal.fire({
+                title: "Hatalı Giriş!",
+                text: "Kullanıcı adınız veya şifreniz hatalıdır.",
+                icon: "error"
+            });
+        } 
+    });
+</script>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
